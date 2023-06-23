@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import "../../styles/acc.scss";
+import "../../styles/acc.css";
 export default function Acc({ data }) {
   let [accState, setAccState] = useState(false);
   let accRef = useRef(null);

@@ -1,5 +1,5 @@
 import Acc from "./components/Acc";
-import "../styles/index.scss";
+import "../styles/index.css";
 import Search from "./components/Search";
 import YtAdv from "./components/YtAdv";
 import GoogleAdv from "./components/GoogleAdv";
