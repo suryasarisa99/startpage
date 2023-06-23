@@ -33,7 +33,7 @@ export default function Acc2({ data, state: { selected, setSelected } }) {
               <div
                 rel="stylesheet"
                 href={link.href}
-                key={link.label}
+                key={link.label + index}
                 onClick={() => {
                   setSelected(index);
                   setAccState(false);

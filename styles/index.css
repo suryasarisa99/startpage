@@ -201,4 +201,25 @@ a {
   bottom: 100%;
   padding-left: 8px;
   padding-bottom: 6px;
+}
+
+.history {
+  position: absolute;
+  width: 100%;
+  bottom: calc(100% + 5px);
+  padding-bottom: 24px;
+  flex-direction: column;
+  max-height: 250px;
+  overflow-y: auto;
+}
+.history .history-item {
+  background-color: rgb(27, 27, 27);
+  margin-bottom: 5px;
+  padding: 5px 8px;
+  border: 1px solid rgb(160, 160, 160);
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  font-size: 18px;
+  border-radius: 8px;
 }/*# sourceMappingURL=index.css.map */

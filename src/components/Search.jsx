@@ -2,11 +2,39 @@ import { useState, useEffect, useRef, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import DataContext from "../../context/DataContext";
 // import { BiLogoBing } from "react-icons/bi";
+import History from "./History";
 export default function Search() {
-  let { setSelectedSE, selectSE, adv, setAdv, sEngines } =
-    useContext(DataContext);
+  let {
+    setSelectedSE,
+    setHistory,
+    history,
+    selectSE,
+    adv,
+    setAdv,
+    selectedSE,
+    sEngines,
+    searchTerm,
+    setSearchTerm,
+    showHistory,
+    setShowHistory,
+  } = useContext(DataContext);
   const handleSubmit = (e) => {
+    e.preventDefault();
     window.open(sEngines[selectSE].href.replace("%s", e.target.search.value));
+    let temp = { ...history };
+    if (temp[sEngines[selectSE].label])
+      temp?.[sEngines[selectSE].label].push(e.target.search.value);
+    else temp[sEngines[selectSE].label] = [e.target.search.value];
+    console.log(temp);
+    // Unique Elements
+    const uniqueSet = new Set(
+      temp[sEngines[selectedSE].label].map((element) => element.toLowerCase())
+    );
+    return;
+    temp[sEngines[selectedSE].label] = Array.from(uniqueSet);
+    // unique End
+    setHistory(temp);
+    localStorage.setItem("history", JSON.stringify(temp));
   };
   let [showSE, setShowSE] = useState(false);
   let SEsRef = useRef(null);
@@ -19,6 +47,8 @@ export default function Search() {
   }, []);
   return (
     <div className="search">
+      <History />
+
       <div className="tools">
         {(selectSE == 0 || selectSE == 1) && !showSE && !adv && (
           <button className="adv-search-tag" onClick={() => setAdv(true)}>
@@ -71,7 +101,18 @@ export default function Search() {
         >
           {sEngines[selectSE].logo}
         </button>
-        <input type="text" name="search" ref={searchRef} />
+        <input
+          type="text"
+          name="search"
+          value={searchTerm}
+          autoComplete="off"
+          autoCapitalize="off"
+          onChange={(e) => {
+            if (!showHistory) setShowHistory(true);
+            setSearchTerm(e.target.value);
+          }}
+          ref={searchRef}
+        />
       </form>
     </div>
   );

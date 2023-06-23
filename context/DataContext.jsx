@@ -15,14 +15,36 @@ function DataProvider({ children }) {
   let [selectSE, setSelectedSE] = useState(0);
   let [adv, setAdv] = useState(false);
   let [sEngines, setSEngines] = useState(s);
+  let [history, setHistory] = useState({});
+  let [searchTerm, setSearchTerm] = useState("");
+  let [showHistory, setShowHistory] = useState(false);
 
   useEffect(() => {
     let index = localStorage.getItem("seIndex");
     setSelectedSE(index || 0);
+    setHistory(
+      JSON.parse(localStorage.getItem("history")) || {
+        Youtube: ["hi youtube"],
+        Google: [],
+      }
+    );
   }, []);
   return (
     <DataContext.Provider
-      value={{ selectSE, setSelectedSE, adv, setAdv, sEngines, setSEngines }}
+      value={{
+        selectSE,
+        setSelectedSE,
+        adv,
+        setAdv,
+        sEngines,
+        setSEngines,
+        history,
+        setHistory,
+        searchTerm,
+        setSearchTerm,
+        showHistory,
+        setShowHistory,
+      }}
     >
       {children}
     </DataContext.Provider>

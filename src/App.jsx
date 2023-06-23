@@ -7,6 +7,7 @@ import DataContext from "../context/DataContext";
 import { useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaChevronUp } from "react-icons/fa";
+import History from "./components/History";
 export default function App() {
   let { selectSE, adv } = useContext(DataContext);
   console.log(selectSE);
