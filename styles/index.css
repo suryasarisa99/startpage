@@ -118,9 +118,9 @@ a {
   background-color: black;
   border-radius: 10px;
   position: absolute;
-  width: 103%;
+  width: 101.25%;
   border: 1px solid grey;
-  left: -3px;
+  left: -2px;
   top: 25px;
   gap: 5px;
   padding: 10px;
@@ -221,5 +221,18 @@ a {
   white-space: nowrap;
   width: 100%;
   font-size: 18px;
+  border-radius: 8px;
+}
+
+.settings-options button {
+  width: 100%;
+}
+
+.history-btn {
+  padding: 8px 12px;
+  font-size: 20px;
+  margin-top: 25px;
+  width: 100%;
+  border: 1px solid rgba(172, 172, 172, 0.699);
   border-radius: 8px;
 }/*# sourceMappingURL=index.css.map */

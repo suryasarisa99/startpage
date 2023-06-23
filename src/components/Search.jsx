@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import DataContext from "../../context/DataContext";
 // import { BiLogoBing } from "react-icons/bi";
-import History from "./History";
+import SuggestHistory from "./SuggestHistory";
 export default function Search() {
   let {
     setSelectedSE,
@@ -22,17 +22,14 @@ export default function Search() {
     e.preventDefault();
     window.open(sEngines[selectSE].href.replace("%s", e.target.search.value));
     let temp = { ...history };
-    if (temp[sEngines[selectSE].label])
-      temp?.[sEngines[selectSE].label].push(e.target.search.value);
-    else temp[sEngines[selectSE].label] = [e.target.search.value];
+    let query = e.target.search.value.toLowerCase().trim();
+    console.log("Query: " + query);
+    if (temp[sEngines[selectSE].label]) {
+      if (!temp?.[sEngines[selectSE].label].includes(query))
+        console.log("Query Inserted");
+      temp?.[sEngines[selectSE].label].push(query);
+    } else temp[sEngines[selectSE].label] = [query];
     console.log(temp);
-    // Unique Elements
-    const uniqueSet = new Set(
-      temp[sEngines[selectedSE].label].map((element) => element.toLowerCase())
-    );
-    return;
-    temp[sEngines[selectedSE].label] = Array.from(uniqueSet);
-    // unique End
     setHistory(temp);
     localStorage.setItem("history", JSON.stringify(temp));
   };
@@ -47,7 +44,7 @@ export default function Search() {
   }, []);
   return (
     <div className="search">
-      <History />
+      <SuggestHistory />
 
       <div className="tools">
         {(selectSE == 0 || selectSE == 1) && !showSE && !adv && (

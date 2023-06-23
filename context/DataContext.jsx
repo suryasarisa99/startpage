@@ -28,6 +28,7 @@ function DataProvider({ children }) {
         Google: [],
       }
     );
+    // localStorage.setItem("history", JSON.stringify("{}"));
   }, []);
   return (
     <DataContext.Provider

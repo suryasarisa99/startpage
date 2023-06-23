@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-export default function Acc2({ data, state: { selected, setSelected } }) {
+export default function Acc2({
+  label,
+  data,
+  state: { selected, setSelected },
+}) {
   let [accState, setAccState] = useState(false);
   // let [selected, setSelected] = useState(0);
   let accRef = useRef(null);
@@ -23,7 +27,7 @@ export default function Acc2({ data, state: { selected, setSelected } }) {
         className="acc-head"
         onClick={() => setAccState((prvState) => !prvState)}
       >
-        <p className="label">{data[selected]}</p>
+        <p className="label">{label || data[selected]}</p>
         {accState ? <FaChevronUp /> : <FaChevronDown />}
       </div>
       {accState && (
