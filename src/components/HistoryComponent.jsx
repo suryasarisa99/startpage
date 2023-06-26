@@ -1,20 +1,50 @@
 import Acc2 from "./Acc2";
-import { useState } from "react";
-export default function HistoryComponent({ label, data, index }) {
-  let [a, setA] = useState(-1);
-  console.log(data);
+import { useState, useEffect, useContext } from "react";
+import DataContext from "../../context/DataContext";
+import HistoryPopup from "./HistoryPopup";
+export default function HistoryComponent({ sengine, data: d, index }) {
+  let { history, setHistory } = useContext(DataContext);
+  let [selected, setSelected] = useState(-1);
+  let [showPopup, setShowPopup] = useState(false);
+  let [data, setData] = useState(d);
+  let fromatedLabel = (
+    <div>
+      {sengine.logo} {sengine.label}
+    </div>
+  );
+  useEffect(() => {
+    if (selected >= 0) {
+      setShowPopup(true);
+    }
+  }, [selected]);
+
+  const onOpen = (e) => {
+    let x = sengine.href.replace("%s", data[selected]);
+    console.log(x);
+    open(x);
+    setSelected(-1);
+    setShowPopup(false);
+  };
+  const onDelete = () => {
+    data.splice(selected, 1);
+    setShowPopup(false);
+    setSelected(-1);
+    setData([...data]);
+    history[sengine] = data;
+    setHistory({ ...history });
+    localStorage.setItem("history", JSON.stringify(history));
+  };
+  const onEdit = () => {};
   return (
     <div className="history-type">
+      {showPopup && (
+        <HistoryPopup onOpen={onOpen} onEdit={onEdit} onDelete={onDelete} />
+      )}
       <Acc2
-        label={label}
+        label={fromatedLabel}
         data={data}
-        state={{ selected: a, setSelected: setA }}
+        state={{ selected, setSelected }}
       />
-      {/* <div className="history-type-head">{label}</div>
-      {typeof data === "object" &&
-        data?.map((item, ind) => {
-          return <div className="history-type-item">{item}</div>;
-        })} */}
     </div>
   );
 }

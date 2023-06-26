@@ -6,7 +6,6 @@ export default function Acc2({
   state: { selected, setSelected },
 }) {
   let [accState, setAccState] = useState(false);
-  // let [selected, setSelected] = useState(0);
   let accRef = useRef(null);
 
   useEffect(() => {
