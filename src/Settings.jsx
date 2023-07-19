@@ -11,6 +11,12 @@ export default function Settings() {
       >
         History
       </button>
+      <button
+        className="settings-options history-btn"
+        onClick={() => navigate("/create-acc")}
+      >
+        Create Accordian
+      </button>
     </div>
   );
 }

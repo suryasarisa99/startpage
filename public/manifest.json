@@ -1,0 +1,16 @@
+{
+  "name": "Surya Start Page",
+  "short_name": "Start Page",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#000000",
+
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ]
+}
